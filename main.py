@@ -1,9 +1,13 @@
 import sqlite3
-from flask import Flask,jsonify
+from flask import Flask,jsonify,render_template,redirect
+
 
 #Create an app, being sure to pass __name__
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return render_template('index.html')
 
 @app.route("/api/v1.0/table")
 def get_table():
