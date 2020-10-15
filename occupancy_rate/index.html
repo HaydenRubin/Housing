@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz1"></div>
+<div id="my_dataviz2"></div>
+<div id="my_dataviz3"></div>
+<div id="my_dataviz4"></div>
+
+
+<script>
+
+    // set the dimensions and margins of the graph
+    var margin = {top: 60, right: 60, bottom: 60, left: 60},
+        width = 860 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
+    
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_dataviz1")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+    var svg2 = d3.select("#my_dataviz2")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+    var svg3 = d3.select("#my_dataviz3")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+    var svg4 = d3.select("#my_dataviz4")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+    
+    //Read the data
+    d3.csv("final_dataset.csv", function(data) { 
+        var occupied = data.map(data => data['Occupied Units']);
+        var ownerOccupied = data.map(data => data['owner-occupied units'])
+
+////////////////////////////////////////////////////////////////////////////////////////////        
+      // chart 4
+      var x4 = d3.scaleLinear()
+        .domain([0,0])
+        .range([ 0, width ]);
+      svg.append("g")
+        .attr("class", "myXaxis")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("opacity", "0")
+        .call(d3.axisBottom(x4));
+    
+      var y4 = d3.scaleLinear()
+        .domain([0, 2500000])
+        .range([ height, 0]);
+      svg.append("g")
+        .call(d3.axisLeft(y4));
+
+  // create a tooltip
+  var Tooltip = d3.select("#my_dataviz1")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px")
+
+  // Three function that change the tooltip when user hover / move / leave a cell
+  var mouseover = function(d) {
+    Tooltip
+      .style("opacity", 1)
+    d3.select(this)
+      .style("stroke", "black")
+      .style("opacity", 1)
+  }
+  var mousemove = function(d) {
+    Tooltip
+      .html(d.NAME + "<br>" + d.Year)
+      .style("left", (d3.mouse(this)[0]+70) + "px")
+      .style("top", (d3.mouse(this)[1]) + "px")
+  }
+  var mouseleave = function(d) {
+    Tooltip
+      .style("opacity", 0)
+    d3.select(this)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+  }
+
+    svg.append('g')
+        .selectAll("dot")
+        .data(data)
+        .enter()
+        .append("circle")
+          .attr("cx", function (d) { return x4(d['Occupied Percent']); } )
+          .attr("cy", function (d) { return y4(d['20 or more units']); } )
+          .attr("r", 5)
+          .style("fill", "teal")
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
+
+      x4.domain([70,100])
+      svg.select(".myXaxis")
+        .transition()
+        .duration(2000)
+        .attr("opacity", "1")
+        .call(d3.axisBottom(x4));
+
+      svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 50 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "24px")  
+        .text("Occupation Rate & Housing with more than 20 units");
+
+
+
+  svg.selectAll("circle")
+        .transition()
+        .delay(function(d,i){return(i*3)})
+        .duration(2000)
+        .attr("cx", function (d) { return x4(d['Occupied Percent']); } )
+        .attr("cy", function (d) { return y4(d['20 or more units']); } )
+
+
+
+
+
+
+        
+      // chart 1
+      var x = d3.scaleLinear()
+        .domain([2010, 2020])
+        .range([ 0, width ]);
+      svg4.append("g")
+        .attr("class", "myXaxis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+    
+      var y = d3.scaleLinear()
+        .domain([0, 3000000])
+        .range([ height, 0]);
+      svg4.append("g")
+        .call(d3.axisLeft(y));
+    
+      svg4.append('g')
+        .selectAll("dot")
+        .data(data)
+        .enter()
+        .append("circle")
+          .attr("cx", function (d) { return x(d['Year']); } )
+          .attr("cy", function (d) { return y(d['20 or more units']); } )
+          .attr("r", 5)
+          .style("fill", "#69a9")
+
+
+
+        //chart 2
+
+        var x2 = d3.scaleLinear()
+            .domain([70, 100])
+            .range([ 0, width ]);
+        svg2.append("g")
+            .attr("class", "myXaxis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x2));
+    
+
+        var y2 = d3.scaleLinear()
+            .domain([0, 1000000])
+            .range([ height, 0]);
+        svg2.append("g")
+            .call(d3.axisLeft(y2));
+
+        svg2.append('g')
+            .selectAll("dot")
+            .data(data)
+            .enter()
+            .append("circle")
+                .attr("cx", function (d) { return x2(d['Occupied Percent']); } )
+                .attr("cy", function (d) { return y2(d['Mobile home']); } )
+                .attr("r", 5)
+                .style("fill", "#69a9")
+
+        //chart 3
+
+        var x3 = d3.scaleLinear()
+            .domain([70, 100])
+            .range([ 0, width ]);
+        svg3.append("g")
+            .attr("class", "myXaxis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x3));
+    
+
+        var y3 = d3.scaleLinear()
+            .domain([0, 1000000])
+            .range([ height, 0]);
+        svg3.append("g")
+            .call(d3.axisLeft(y3));
+
+        svg3.append('g')
+            .selectAll("dot")
+            .data(data)
+            .enter()
+            .append("circle")
+                .attr("cx", function (d) { return x3(d['Occupied Percent']); } )
+                .attr("cy", function (d) { return y3(d['Median (dollars)']); } )
+                .attr("r", 5)
+                .style("fill", "#69a9")
+
+
+
+        console.log(data[0])    
+    })
+
+
+    
+    </script>
