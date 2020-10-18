@@ -6,18 +6,66 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>SMOCAPI</title>
+	<title>Housing Values</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 	<script src="https://d3js.org/d3.v5.min.js"></script>
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 </head>
 
 <body>
 	{% extends "template.html" %}
 	{% block content %}
 	
-    <h1>TEST FOR line and scatter CHART PAGE</h1>
-	<div id='YOUR UNIQUE MAP ID'><!-- chart will be drawn inside this DIV --></div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="container">
+				<div class="row margin-top-50">
+					<h1>This is for SMOCAPI line chart</h1>
+				</div>
+			</div>	
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="container">
+				<div class="row margin-top-50">
+				  <div class="col-md-2">
+					<aside class="filters">
+					  <div class="panel panel-default">
+						<div class="panel-heading">Filter Search</div>
+						<div class="panel-body">
+						  <form>
+							<div class="form-group">
+							  <ul class="list-group" id="filters">
+								<li class="filter list-group-item">
+								  <label for="year">Enter a Year</label>
+								  <input class="form-control" id="year" type="text" placeholder="2011">
+								  <label for="year">-------</label>
+								</li>
+								<li class="filter list-group-item">
+								  <label for="date">Enter a State</label>
+								  <input class="form-control" id="state" type="text" placeholder="Iowa">
+								</li>
+							  </ul>
+							</div>
+							<button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
+						  </form>
+						</div>
+					  </div>
+					</aside>
+				  </div>
+				  <div class="col-md-10">
+					<div id="canvas-holder" style="width:70%">
+						<canvas id="myChart"></canvas>
+					</div>
+				 </div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
 		
 	<script type="text/javascript" src="./static/js/line_and_sca.js"></script>
 
@@ -26,4 +74,6 @@
 
 
 </html>
+
+
 
