@@ -9,7 +9,8 @@ d3.select("#yearDropdown").on("change", function (d) {
     updateTable(selectedYear, selectedFuel)
 });
 
-var selectedFuel = "all";
+var selectedFuel = "all";     //default fuel type is set to all fuel types
+var selectedYear = 2019;
 
 // When the button is changed, run the updateChart function
 d3.select("#fuelDropdown").on("change", function (d) {
@@ -24,9 +25,11 @@ function updateTable(year, selectedFuel) {
     keys = masterData.columns.slice(4, 12, masterData.columns.length - 2); //exclude the total_fuel_user column
     var yearData = getFilteredData(masterData, year);
     d3.select("#chart").html("");
+    d3.select("#chartTitle").html("");
+    d3.select("#legend").html("");
     render(yearData, keys, selectedFuel);
 }
-var data = d3.csv("static/data/final_dataset_101520.csv")
+var data = d3.csv("./static/data/final_dataset_101520.csv")
     .then(data => {
         data.forEach(d => {
             d.total_fuel_user = +d.total_fuel_user;
@@ -51,7 +54,7 @@ var data = d3.csv("static/data/final_dataset_101520.csv")
             .text(function (d) { return d; }) // text showed in the menu
             .attr("value", function (d) { return d; }); // corresponding value returned by the button
 
-        updateTable(2019, selectedFuel);
+        updateTable(selectedYear, selectedFuel);
 
         // add the options to the fuel drop-down button
         d3.select("#fuelDropdown")
@@ -70,10 +73,11 @@ function getFilteredData(data, year) {
     
 }
 
-function update(yearData) {
-    const index = d3.range(yearData.length);
-    const order = yearDropdown === 2015 ? d3.ascending : d3.descending;
-    index.sort((i, j) => order(yearData[i][yearDropdown], yearData[j][yearDropdown]));
+function update(states) {
+    const index = d3.range(states.length);
+
+    const order = fuelDropdown === "wood" ? d3.ascending : d3.descending;
+    index.sort((i, j) => order(states[i][fuelDropdown], states[j][fuelDropdown]));
     return chart;
 }
 
@@ -95,9 +99,9 @@ function render(yearData, keys, selectedFuel) {
     .data(keys)
     .enter()
     .append("circle")
-        .attr("cx", function(d,i){ return 150 + i*70}) // 25 is where the first dot appears. 100 is the distance between dots
+        .attr("cx", function(d,i){ return width/2 + i*65 + margin.left}) // 25 is where the first dot appears. 100 is the distance between dots
         .attr("cy", 20) 
-        .attr("r", 5)
+        .attr("r", 4)
         .style("fill", function(d){ return color(d)})
 
     // Add one dot in the legend for each name.
@@ -105,11 +109,10 @@ function render(yearData, keys, selectedFuel) {
     .data(keys)
     .enter()
     .append("text")
-        .attr("x", function(d,i){ return 150 + i*70})
+        .attr("x", function(d,i){ return width/2 + i*65 + margin.left})
         .attr("y", 6) 
         .attr("text-anchor", "middle")
         .text(function(d){ return d})
-        .style("font", "12px sans-serif")
         .style("alignment-baseline", "middle")
 
     x = d3.scaleLinear()
@@ -152,70 +155,71 @@ function render(yearData, keys, selectedFuel) {
 
         g.append("line")
             .attr("stroke", "#aaa")
+            .attr("class", "gridline")
             .attr("x1", d => x(d3.min(keys, k => d[k])))
             .attr("x2", d => x(d3.max(keys, k => d[k])));
         
-        var labelX = "% Use:";
-        var labelY = "State:";
-        var labelZ = "Fuel :"
-        // var tip = d3.tip()
-        //     .attr("class","d3-tip")
-        //     .offset([-10, 30])
-        //     .html(function([k, d]) {
-        //         return (`${labelY} ${d.state}<br>${labelX} ${d.year}%<br>${labelZ} ${k}`);
-        //     });
-        // g.call(tip);
-
-        // append initial circles
-        var circlesGroup = g.selectAll("circle")
-            .data(d => d3.cross(keys, [d]))
-            .join("circle")
+            var labelUse = "Use:";
+            var labelState = "State:";
+            var labelFuel = "Fuel :"
+            var formatPercent = d3.format(".2%");
+    
+            var tip = d3.tip()
+                .attr("class", "d3-tip")
+                .offset([-10, 30])
+                .html(function ([k ,d]) {
+                    return (`${labelState} ${d.state}<br>${labelFuel} ${k}<br>${labelUse} ${formatPercent(d[k])}`);
+                })
+            g.call(tip);
+    
+            // append initial circles
+            var dots = g.selectAll("circle")
+                .data(d => d3.cross(keys, [d]))
+                .join("circle")
                 .attr("cx", ([k, d]) => x(d[k]))
                 .attr("fill", ([k]) => color(k))
                 .attr("r", 4)
-                .classed("fuelCircle", function ()
-                { 
+                .classed("fuelCircle", function () {
                     if (selectedFuel === "all") {       // highlight all circles at the beginning
                         return true;
-                        }
-                        return false;
+                    }
+                    return false;
                 })
-                .classed("active", function ([k])
-                { 
+                .classed("active", function ([k]) {
                     if (k === selectedFuel && selectedFuel !== "all") {    // highlight the selected fuel type only
                         return true;
-                        }
-                        return false;
+                    }
+                    return false;
                 })
-                .classed("inactive", function ([k])
-                { 
+                .classed("inactive", function ([k]) {
                     if (k !== selectedFuel && selectedFuel !== "all") {    // dim the other fuel types that are not selected
                         return true;
-                        }
-                        return false;
+                    }
+                    return false;
                 })
-                .transition()
-                .duration(500);
-                // .on("mouseover", tip.show)
-                // .on('mouseout', tip.hide);
-
-        g.append("text")
-            .attr("dy", "0.35em")
-            .attr("style", "bold")
-            .attr("x", margin.left)
-            .text((d, i) => d.state);
-        
-        // add chart title
-        d3.select("#legend").append("text")
-            .attr("dy", "0.55em")
-            .attr("style", "bold")
-            .attr("font-size", "50")
-            .attr("x", width - margin.right)
-            .attr("y", 5)
-            .text("House Heating Fuel Types")
-            .classed("chartTitleText", true);
-        
-        g.exit().remove();
+                .on('mouseover', tip.show)
+                .on('mouseout', tip.hide);
+    
+            dots.transition()
+                .duration(500)
+                .delay(100);
+    
+            g.append("text")
+                .attr("dy", "0.35em")
+                .attr("style", "bold")
+                .attr("x", margin.left)
+                .text((d, i) => d.state);
+    
+            // add chart title
+            d3.select("#chart-title").append("text")
+                .attr("dy", "0.55em")
+                .attr("style", "bold")
+                .attr("x", width/2 + margin.left)
+                .attr("y", 5)
+                .text("House Heating Fuel types")
+                .classed("chartTitleText", true);
+    
+            g.exit().remove();
 
         return Object.assign(svg.node(), {
             update(states) {
