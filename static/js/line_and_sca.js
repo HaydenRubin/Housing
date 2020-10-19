@@ -145,7 +145,7 @@ d3.json(url).then(function(data){
         .attr("fill", "black")
         .attr("font-weight","900")
         .style("font-size", "24px")  
-        .text(`Cost Burden By State`);
+        .text(`Cost Burden % of House Owner Population By State`);
 
     titleChunk.append("text")
         .attr("x", (width / 2))             
