@@ -2,7 +2,7 @@
 var parseDate = d3.timeParse("%m/%d/%Y");
 
 // read the csv file and exract the required data
-d3.csv("static/data/final_dataset_101520.csv")
+d3.csv("static/data/final_dataset_101520.csv") //static/data/final_dataset_101520.csv 
     .then(data => {
         data.forEach(d => {
             d.value = +d.house_median_value;
