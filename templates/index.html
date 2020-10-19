@@ -22,34 +22,40 @@
 		<div class="row">
 		  <div class="col-md-2">
 			<div class="well">
-			  <h5>YEAR</h5>
-			  <select id="selDataset"></select>
+				<h5><strong>Occupied Housing Units</strong> A housing unit is occupied if a person or group of persons is living in
+					it at the time of the interview or if the occupants are only temporarily absent, as for example, on
+					vacation. The persons living in the unit must consider it their usual place of residence or have no
+					usual place of residence elsewhere. The count of occupied housing units is the same as the count
+					of households. Vacation homes are not occupied housing units.
+				</h5>
 			</div>
-			<div class="panel panel-primary">
-				<div class="panel-heading">Some Info</div>
-				<div id="sample-metadata" class="panel-body"></div>
-			</div>  
+	        <div class="well">
+	         <h5>YEAR</h5>
+	         <select id="selDataset"></select>
+			</div>
 		  </div>
-	
-		  <div class="col-md-10">
+
+		  <div class="col-md-8">
 			<div id='geoMap'><!-- Plotly chart will be drawn inside this DIV --></div>
 		  </div>
+
+		  <div class="col-md-2">
+			<div >Maybe SOMETHING HERE</div>
+		  </div>
+
 		</div>
 		
 		<div class="row">
 		  <div class="col-lg-12">
-			<div id="table"></div>
+			<div id="scaplot"></div>
 		  </div>
 		</div>
-	  </div>
-	
+
+	</div>
+
 	<script type="text/javascript" src="./static/js/geomap.js"></script>
 
 	{% endblock %}
 </body>
 
-
-
-
 </html>
-
