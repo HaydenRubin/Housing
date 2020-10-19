@@ -1,0 +1,106 @@
+html,
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 10px;
+}
+
+.mylables {
+  font-size: 5px;
+}
+.legend-group div{
+  display:inline-block;
+  margin-left:15px;
+  width:16px;
+  border:1px solid #808080;
+}
+.x-axis .tick line {
+  color: #d3d3d3;
+}
+
+.x-axis .tick text {
+  color: #d3d3d3;
+}
+
+/* D3 style */
+
+.d3-tip {
+  padding: 6px;
+  font-size: 6px;
+  line-height: 1;
+  line-height: 1.5em;
+  color: #fff;
+  text-align: center;
+  text-transform: capitalize;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+}
+
+.fuelCircle {
+  stroke: #e3e3e3;
+  opacity: 1;
+}
+
+.fuelCircle:hover {
+  cursor: pointer;
+  fill: black;
+  opacity: 1;
+}
+
+.active {
+  font-weight: bold;
+  transition: fill 0.3s ease-out;
+  text-anchor: middle;
+  stroke: grey;
+  opacity: 1;
+  z-index:99;
+}
+
+.active:hover {
+  transition: fill 0.3s ease-out;
+  stroke: whitesmoke;
+  opacity: 1;
+  z-index:99;
+}
+
+.inactive:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.inactive {
+  cursor: pointer;
+  opacity: 0.2;
+  z-index:0;
+}
+
+.chartTitleText {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.chart {
+  display: block;
+  margin: 0;
+}
+
+/* Mobile Rules */
+@media screen and (max-width: 530px) {
+  .stateText {
+    display: none;
+  }
+
+  .aText {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .aText {
+    font-size: 13px;
+  }
+}
