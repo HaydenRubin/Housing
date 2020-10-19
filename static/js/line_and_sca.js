@@ -156,6 +156,24 @@ d3.json(url).then(function(data){
         .style("font-size", "24px")  
         .text("2010-2019");
     
+    svg.append("text")
+        .attr("x", width-15)
+        .attr("y", height-5)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("font-weight","600")
+        .style("font-size", "16px")
+        .text("Year");
+        
+    svg.append("text")
+        .attr("x", 65)
+        .attr("y", 15)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("font-weight","600")
+        .style("font-size", "16px")
+        .text("cost burden %");
+    
     // titleChunk.append("text")
     //     .attr("x", (width / 2))             
     //     .attr("y", 0)
