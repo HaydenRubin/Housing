@@ -216,7 +216,7 @@ function render(yearData, keys, selectedFuel) {
                 .attr("style", "bold")
                 .attr("x", width/2 + margin.left)
                 .attr("y", 5)
-                .text("House Heating Fuel types")
+                .text("House Heating Fuel Types")
                 .classed("chartTitleText", true);
     
             g.exit().remove();
