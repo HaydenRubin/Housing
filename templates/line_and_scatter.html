@@ -35,23 +35,26 @@
 					</div>
 			</div>
 					
-			<div class="col-md-8" style="background-color: rgb(175, 197, 238);">
+			<div class="col-md-8" style="background-color: rgb(175, 197, 238); padding-left: 10%;">
 						<!-- Create a div where the graph will take place -->
 						<div id= "title_chunk"></div>
 						<div id="my_dataviz"></div>
 						<div id="legend_chunk"></div>
 			</div>
 
-			<div class="col-md-2">
-				<h3>An indicator of HOUSING AFFORDABILITY: SMOCAPI (selected monthly owner costs as	a percentage of	household	
+			<div class="col-md-2" >
+				<h3>An indicator of house affordability: <strong style="color:coral">SMOCAPI</strong> (selected monthly owner costs as	a percentage of	household	
 					income)</h3>
 				<br>
-				<h5>Housing affordability is determined by calculating
+				<p>Housing affordability is determined by calculating
 					the percentage of the household’s total annual
 					gross income paid for housing costs (mortgage/
 					rent, utilities, mortgage insurance, etc.)
-				</h5>
+				</p>
 				<br>
+				<h4> <strong style="color:coral">Cost Burden:</strong> One of the four HUD (The US Department of Housing and Urban Development) housing problems. 
+					Cost burden refers to households whose monthly housing costs, including rent or mortgage payments and utility costs, 
+					exceed 30 percent of a household’s monthly income. </h4>
 
 		   </div>
 		</div>
@@ -63,7 +66,7 @@
 			<div class="col-md-12">
 	
 					<div class="row margin-top-50">
-					  <div class="col-md-2">
+					  <div class="col-md-2" style="padding-top: 5%;">
 						<aside class="filters">
 						  <div class="panel panel-default">
 							<div class="panel-heading">Filter Search for $$</div>
@@ -88,11 +91,13 @@
 						  </div>
 						</aside>
 					  </div>
-					  <div class="col-md-10">
-						<div id="canvas-holder" style="width:70%">
+					  <div class="col-md-8" style="background-color: rgb(175, 197, 238);">
+						<div id="canvas-holder" style="width:100%">
 							<canvas id="myChart"></canvas>
 						</div>
-					 </div>
+					  </div>
+					  <div class="col-md-2">
+					  </div>
 					</div>
 	
 			</div>	

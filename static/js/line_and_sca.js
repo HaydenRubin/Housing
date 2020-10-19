@@ -143,14 +143,16 @@ d3.json(url).then(function(data){
         .attr("y", 0)
         .attr("text-anchor", "middle")  
         .attr("fill", "black")
+        .attr("font-weight","900")
         .style("font-size", "24px")  
-        .text(`Ownership Costs (SMOCAPI) By State`);
+        .text(`Cost Burden By State`);
 
     titleChunk.append("text")
         .attr("x", (width / 2))             
         .attr("y", 40)
         .attr("text-anchor", "middle")
         .attr("fill", "black")  
+        .attr("font-weight","900")
         .style("font-size", "24px")  
         .text("2010-2019");
     
@@ -179,13 +181,13 @@ d3.json(url).then(function(data){
           .attr("r", 6).style("fill", "orange"); //#b2b7ba
     svg.append("text")
           .attr("x", 30).attr("y", 330)
-          .text("upkeep costs with mortgage")
+          .text("SMOCAPI >35% with mortgage")
           .style("font-size", "15px")
           .style("fill", "black")
           .attr("alignment-baseline","middle");
     svg.append("text")
           .attr("x", 30).attr("y", 360)
-          .text("upkeep costs without mortgage")
+          .text("SMOCAPI >35% without mortgage")
           .style("font-size", "15px")
           .style("fill", "black")
           .attr("alignment-baseline","middle");
@@ -232,7 +234,7 @@ d3.json(url).then(function(data){
                 display: true,
                 postiton:'top',
                 fontSize: 25,
-                fontColor: 'sandybrown',
+                fontColor: 'black',
                 fontStyle:'bold',
                 padding:15,
                 text: `${year} ${state} House Median Values`
