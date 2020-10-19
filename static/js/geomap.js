@@ -7,6 +7,8 @@ const url="/api/v1.0/table";
 
 d3.json(url).then(function(data){
     
+    var tableData=data;
+
     //populating dropdown manue
     var selectTag= d3.select("#selDataset");
 
@@ -27,9 +29,8 @@ d3.json(url).then(function(data){
         .text(function(d){
             return d;
         });      
-    
-    function plotGeomap(yearSelected) {
-
+//################################################# Make GeoMap ######################################################
+    function plotGeomap(data,yearSelected) {
 
         //create an array of object with targed data
         var filteredData=data.filter(row => row.year==yearSelected);
@@ -53,7 +54,9 @@ d3.json(url).then(function(data){
             colorscale: 'Hot',
             colorbar: {
                 title: 'Percentage',
-                width: 4
+                thinkness: 0.5,
+                
+
             },
             marker: { //outline of states
                 line:{
@@ -64,21 +67,73 @@ d3.json(url).then(function(data){
         }];
         
         var layout = {
-            title: `${yearSelected} US Housing Occupied Percentage by State`,
+            title: `${yearSelected} US Housing OCCUPANCY RATE by State`,
             geo:{
                 scope: 'usa',
                 showlakes: true,
                 lakecolor: 'rgb(255,255,255)'
-            }
+            },
+            margin:{
+                    l: 0,
+                    r: 0,
+                    b: 30,
+                    t: 30,
+                    pad: 4
+            },
+            paper_bgcolor: '#CEE3F6',
+            plot_bgcolor: '#CEE3F6'
         };
         
         Plotly.newPlot("geoMap", traceData, layout, {showLink: false});  
     };
+//################################################# Make Scatter Plot ######################################################
+    function plotScatter(data, yearSelected){
 
-     //display defualt plots as ID=940
-     function init(){
+        //create an array of object with targed data
+        var filteredData=data.filter(row => row.year==yearSelected);
+        console.log(filteredData);
+
+        //create arrays of values to put into the data variable below
+        var stateRates=filteredData.map(row=>row.occupied_perc);
+        var stateMedval=filteredData.map(row=>row.house_median_value)
+        var stateFullname=filteredData.map(row=>row.state);
+
+        console.log(stateRates);
+        console.log(stateMedval);
+
+        var trace1 = {
+            x: stateRates,
+            y: stateMedval,
+            mode: 'markers',
+            type: 'scatter',
+            marker: { 
+                size: 15,
+                color: stateMedval},
+            text:stateFullname
+          };
+          
+          
+          var data = [ trace1];
+          
+          var layout = {
+            xaxis: {
+              title:{text:"Ocuppied Rate"}
+            },
+            yaxis: {
+              title:{text:"Median House Value"}
+            },
+            title:`${yearSelected} US Housing Occupancy Rate vs Median House Values`
+          };
+          
+        Plotly.newPlot('scaplot', data, layout);
+          
+    };
+
+    //display defualt plots as ID=940
+    function init(){
         //initial geomap
-        plotGeomap(2019)
+        plotGeomap(tableData,2019)
+        plotScatter(tableData,2019)
      };
 
     init();
@@ -92,7 +147,8 @@ d3.json(url).then(function(data){
         console.log(selectedValue);
 
         //update geomap
-        plotGeomap(selectedValue);
+        plotGeomap(tableData,selectedValue);
+        plotScatter(tableData,selectedValue);
     };
     
 });
