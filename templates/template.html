@@ -19,14 +19,13 @@
     <nav class="navbar navbar-expand-lg nav-custom-small" style="background-image: url('https://sonomacounty.ca.gov/uploadedImages/Sonoma_County_Portal/PRMD/_Uploaded_Images/_Carousel/Planning/Housing%20types%20red%20banner%20500x250.jpg?n=3389'); padding:4% ;">
       <!-- "background-color: #0BADA6;" -->
       
-    
-      <a class="navbar-brand" style="border-radius: 15px 50px;background: #4a7211;color:bisque; margin-left:50px; font-weight:600;
-        font-size:1.75rem;padding:1%" href="{{ url_for('home') }}"><span style="padding-top: 50%;">US HOUSING INFO</span>
+    <div class="container-fluid">
+      <a class="navbar-brand" style="border-radius: 15px 50px;background: #4a7211;color:bisque;margin-left:50px; padding:1% ;font-size:16px; font-weight:bold" href="{{ url_for('home') }}"><span style="padding-top: 50%;">US HOUSING INFO</span>
       </a>
-      
-      <div class="collapse navbar-collapse" >
-        <ul class="navbar-nav ml-auto" style="border-radius: 15px 50px;background: #4a7211; margin-left:50px; font-weight:600;
-        font-size:1.75rem;padding:1%;">
+      <!--  font-weight:600;
+        ;" -->
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto" style="border-radius: 15px 50px;background: #4a7211;color:bisque; margin-left:50px; padding:1%; font-size:16px; font-weight:bold" >
           <li class="nav-item active">
             <a class="nav-link" style="color: bisque;text-decoration: underline;" href="{{ url_for('value') }}">Home Values</a>
           </li>
@@ -38,6 +37,8 @@
           </li>
          </ul>
       </div>
+    </div>
+      
     </nav>
         
     {% block content %}
