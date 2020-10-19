@@ -168,13 +168,13 @@ function render(data) {
     async function* chart() {
         const svg = d3.select("#chart").append("svg")
             .attr("viewBox", [0, 0, width, height]);
-        
+
+    //EMILY EDITED
         // add chart title
         d3.select("#legend").append("text")
-            .attr("dy", "0.55em")
-            .attr("style", "bold")
-            .attr("x", margin.left)
-            .attr("y", 5)
+            .attr("dy", "50%")
+            .attr("x", "15%")
+            .attr("y", "30%")
             .text("Yearly Trend of House Median Values")
             .classed("chartTitleText", true);
 
