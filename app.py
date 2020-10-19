@@ -20,6 +20,10 @@ def fuel():
 @app.route("/smocapi")
 def smocapi():
     return render_template('line_and_scatter.html')
+    
+@app.route("/evan")
+def evan():
+    return render_template('evan.html')
 
 @app.route("/api/v1.0/table")
 def get_table():
