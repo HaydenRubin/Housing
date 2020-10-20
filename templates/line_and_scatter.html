@@ -7,63 +7,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Housing Values</title>
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <!-- D3.js -->
 	<script src="https://d3js.org/d3.v5.min.js"></script>
+
+	<!-- jQuery -->
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+	<!-- Color Scale -->
+	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 </head>
 
 <body>
 	{% extends "template.html" %}
 	{% block content %}
 	
-	<div class="row">
-		<div class="col-md-12">
-			<div class="container">
-				<div class="row margin-top-50">
-					<h1>This is for SMOCAPI line chart</h1>
-				</div>
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-md-2">
+					<div class="well">
+						<!-- Initialize a select button -->
+						<select id="selectButton"></select>
+					</div>
+			</div>
+					
+			<div class="col-md-8" style="background-color: rgb(175, 197, 238);">
+						<!-- Create a div where the graph will take place -->
+						<div id= "title_chunk"></div>
+						<div id="my_dataviz"></div>
+						<div id="legend_chunk"></div>
+			</div>
+
+			<div class="col-md-2">
+				<h3>An indicator of HOUSING AFFORDABILITY: SMOCAPI (selected monthly owner costs as	a percentage of	household	
+					income)</h3>
+				<br>
+				<h5>Housing affordability is determined by calculating
+					the percentage of the household’s total annual
+					gross income paid for housing costs (mortgage/
+					rent, utilities, mortgage insurance, etc.)
+				</h5>
+				<br>
+
+		   </div>
+		</div>
+
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+	
+					<div class="row margin-top-50">
+					  <div class="col-md-2">
+						<aside class="filters">
+						  <div class="panel panel-default">
+							<div class="panel-heading">Filter Search for $$</div>
+							<div class="panel-body">
+							  <form>
+								<div class="form-group">
+								  <ul class="list-group" id="filters">
+									<li class="filter list-group-item">
+									  <label for="year">Enter a Year</label>
+									  <input class="form-control" id="year" type="text" placeholder="2011">
+									  <label for="year">-------</label>
+									</li>
+									<li class="filter list-group-item">
+									  <label for="date">Enter a State</label>
+									  <input class="form-control" id="state" type="text" placeholder="Iowa">
+									</li>
+								  </ul>
+								</div>
+								<button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
+							  </form>
+							</div>
+						  </div>
+						</aside>
+					  </div>
+					  <div class="col-md-10">
+						<div id="canvas-holder" style="width:70%">
+							<canvas id="myChart"></canvas>
+						</div>
+					 </div>
+					</div>
+	
 			</div>	
 		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12">
-			<div class="container">
-				<div class="row margin-top-50">
-				  <div class="col-md-2">
-					<aside class="filters">
-					  <div class="panel panel-default">
-						<div class="panel-heading">Filter Search</div>
-						<div class="panel-body">
-						  <form>
-							<div class="form-group">
-							  <ul class="list-group" id="filters">
-								<li class="filter list-group-item">
-								  <label for="year">Enter a Year</label>
-								  <input class="form-control" id="year" type="text" placeholder="2011">
-								  <label for="year">-------</label>
-								</li>
-								<li class="filter list-group-item">
-								  <label for="date">Enter a State</label>
-								  <input class="form-control" id="state" type="text" placeholder="Iowa">
-								</li>
-							  </ul>
-							</div>
-							<button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
-						  </form>
-						</div>
-					  </div>
-					</aside>
-				  </div>
-				  <div class="col-md-10">
-					<div id="canvas-holder" style="width:70%">
-						<canvas id="myChart"></canvas>
-					</div>
-				 </div>
-				</div>
-			</div>
-		</div>	
+		
 	</div>
 	
 		
