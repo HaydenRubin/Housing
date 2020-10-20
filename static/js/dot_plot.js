@@ -212,7 +212,7 @@ function render(yearData, keys, selectedFuel) {
     
             // add chart title
             d3.select("#chart-title").append("text")
-                .attr("dy", "0.55em")
+                .attr("dy", "0.56em")
                 .attr("style", "bold")
                 .attr("x", width/2 + margin.left)
                 .attr("y", 5)
