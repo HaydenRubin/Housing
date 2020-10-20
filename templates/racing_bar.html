@@ -1,29 +1,27 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
-
-<head>
-	<meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Housing Values</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://d3js.org/d3.v5.min.js"></script>
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
 
-<body>
-	{% extends "template.html" %}
-	{% block content %}
-	
-    <h1>TEST FOR RACING BAR CHART PAGE</h1>
-	<div id='YOUR UNIQUE MAP ID'><!-- chart will be drawn inside this DIV --></div>
-		
-	<script type="text/javascript" src="./static/js/racing_bar.js"></script>
+    <title>Home Values</title>
+      <link rel="stylesheet" type="text/css" href="./static/css/racing_bar.css"/>
+  </head>
 
-	{% endblock %}
-</body>
-
-
+  <body>
+    {% extends "template.html" %}
+  	{% block content %}
+    <svg id="legend" height=50 width=1050></svg>
+    <g id="chartTitle"></g>
+    <!-- <div><button id="replay">Replay</button></div> -->
+    <div id="chart">
+     
+    </div>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+    <script type="text/javascript" src="./static/js/racing_bar.js"></script>
+    {% endblock %}
+  </body>
 </html>
-

@@ -143,17 +143,48 @@ d3.json(url).then(function(data){
         .attr("y", 0)
         .attr("text-anchor", "middle")  
         .attr("fill", "black")
+<<<<<<< HEAD
         .style("font-size", "24px")  
         .text(`Ownership Costs (SMOCAPI) By State`);
+=======
+        .attr("font-weight","900")
+        .style("font-size", "24px")  
+        .text(`Cost Burden % of House Owner Population By State`);
+>>>>>>> 28c1bfba9ed77dd4453e0d2dc701faeb642981ce
 
     titleChunk.append("text")
         .attr("x", (width / 2))             
         .attr("y", 40)
         .attr("text-anchor", "middle")
         .attr("fill", "black")  
+<<<<<<< HEAD
         .style("font-size", "24px")  
         .text("2010-2019");
     
+=======
+        .attr("font-weight","900")
+        .style("font-size", "24px")  
+        .text("2010-2019");
+    
+    svg.append("text")
+        .attr("x", width-15)
+        .attr("y", height-5)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("font-weight","600")
+        .style("font-size", "16px")
+        .text("Year");
+        
+    svg.append("text")
+        .attr("x", 65)
+        .attr("y", 15)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("font-weight","600")
+        .style("font-size", "16px")
+        .text("cost burden %");
+    
+>>>>>>> 28c1bfba9ed77dd4453e0d2dc701faeb642981ce
     // titleChunk.append("text")
     //     .attr("x", (width / 2))             
     //     .attr("y", 0)
@@ -179,13 +210,21 @@ d3.json(url).then(function(data){
           .attr("r", 6).style("fill", "orange"); //#b2b7ba
     svg.append("text")
           .attr("x", 30).attr("y", 330)
+<<<<<<< HEAD
           .text("upkeep costs with mortgage")
+=======
+          .text("SMOCAPI >35% with mortgage")
+>>>>>>> 28c1bfba9ed77dd4453e0d2dc701faeb642981ce
           .style("font-size", "15px")
           .style("fill", "black")
           .attr("alignment-baseline","middle");
     svg.append("text")
           .attr("x", 30).attr("y", 360)
+<<<<<<< HEAD
           .text("upkeep costs without mortgage")
+=======
+          .text("SMOCAPI >35% without mortgage")
+>>>>>>> 28c1bfba9ed77dd4453e0d2dc701faeb642981ce
           .style("font-size", "15px")
           .style("fill", "black")
           .attr("alignment-baseline","middle");
@@ -232,7 +271,7 @@ d3.json(url).then(function(data){
                 display: true,
                 postiton:'top',
                 fontSize: 25,
-                fontColor: 'sandybrown',
+                fontColor: 'black',
                 fontStyle:'bold',
                 padding:15,
                 text: `${year} ${state} House Median Values`
